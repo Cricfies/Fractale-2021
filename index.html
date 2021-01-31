@@ -4,10 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fractale</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <!-- Quasar css  -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/quasar@1.12.4/dist/quasar.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <canvas id="canvas" width="600" height="450"></canvas>
+    <!-- Contenaire de l'application -->
+    <div id='app'>
+        <q-toolbar class="text-primary text-center bg-white shadow-1">
+            <q-toolbar-title>Fractales.</q-toolbar-title>
+        </q-toolbar>  
 
+        <div class="row">
+            <div class="offset-4 col-4 q-ma-md">
+                <center>
+                    <q-btn style="background: #6db6d3; color: white" label="Ensemble de Mandelbrot" @click="drawMandelbrotSet"></q-btn>
+                    <q-btn style="background: #43acd6; color: white" label="Ensemble de Julia" 
+                    @click="drawJuliaSet(parseFloat(vm.reel), parseFloat(vm.imaginaire))"></q-btn>
+                </center>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-4 col-2 q-ma-sm">
+                <q-input filled v-model="reel" placeholder="reel entre -1 et 1" hint="Par exemple 0" :dense="dense" ></q-input>
+            </div>
+            <div class="col-2 q-ma-sm">
+                <q-input filled v-model="imaginaire" placeholder="imaginaire entre -1 et 1" hint="Par exemple 0.8" :dense="dense"></q-input>
+            </div>
+        </div>
+    </div>
+
+    <div class="canvas-container">
+        <canvas id="canvas" width="800" height="500" style="border-radius: 5px;"></canvas>
+    </div>
+
+    <!-- Programme des Fractale -->
     <script src="script.js"></script>
+    <!-- Vue.js et Quasar -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@^2.0.0/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@1.12.4/dist/quasar.umd.min.js"></script> 
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    reel:null,
+                    imaginaire:null,
+                    dense: true
+                }
+            }
+        })
+    </script>
 </body>
 </html> 
